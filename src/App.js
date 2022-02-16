@@ -9,17 +9,26 @@ export default function App() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
 
-      const random = Math.ceil(Math.random() * 6);
-      newDice.push(random);
+      const randomNumber = Math.ceil(Math.random() * 6);
+
+      newDice.push({
+        value: randomNumber,
+        isHeld: false,
+      });
 
     }
     return newDice;
-
   }
 
   const [dice, setDice] = useState(allNewDice())
 
-  const diceElements = dice.map((die, index) => <Die key={index} value={die} />)
+  const diceElements = dice.map((die, index) => (
+      <Die
+          key={index}
+          value={die.value}
+          isHeld={die.isHeld}
+      />
+  ))
 
   const rollDice = () => {
     setDice(allNewDice())
