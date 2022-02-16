@@ -5,19 +5,21 @@ import './App.css';
 import Die from './components/Die/Die';
 
 export default function App() {
+  const generateDie = () => {
+    const randomNumber = Math.ceil(Math.random() * 6);
+
+    return {
+      id: nanoid(),
+      value: randomNumber,
+      isHeld: false,
+    }
+  }
+
   const allNewDice = () => {
 
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-
-      const randomNumber = Math.ceil(Math.random() * 6);
-
-      newDice.push({
-        id: nanoid(),
-        value: randomNumber,
-        isHeld: false,
-      });
-
+      newDice.push(generateDie());
     }
     return newDice;
   }
@@ -44,7 +46,11 @@ export default function App() {
   ))
 
   const rollDice = () => {
-    setDice(allNewDice())
+    setDice((prevDice) => {
+      return prevDice.map((die) => {
+        return die.isHeld ? die : generateDie();
+      });
+    });
   }
 
   return (
