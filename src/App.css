@@ -26,6 +26,7 @@ main {
   font-size: 1.2rem;
   font-family: "Karla", sans-serif;
   cursor: pointer;
+  user-select: none;
 }
 
 .roll-button:focus {
